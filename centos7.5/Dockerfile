@@ -38,18 +38,18 @@ ENV HOME /home/${USER}
 #Pyenv install
 ##Pyenv Homepage(git) - https://github.com/pyenv/pyenv
 RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-ENV PYENV_ROOT=$HOME/.pyenv
-ENV PATH=$PYENV_ROOT/bin:$PATH
-RUN source ~/.bash_profile
+RUN echo 'export PYENV_ROOT=$HOME/.pyenv' >> /home/${USER}/.bash_profile
+RUN echo 'export PATH=$PYENV_ROOT/bin:$PATH' >> /home/${USER}/.bash_profile
+RUN source /home/${USER}/.bash_profile
 #RUN pyenv install 3.7.3 && \
 #pyenv global 3.7.3
 
 #Nvm install
 ##Nvm Homepage(git) - https://github.com/nvm-sh/nvm
 RUN git clone https://github.com/nvm-sh/nvm.git ~/.nvm
-ENV NVM_DIR="$HOME/.nvm"
-ENV [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-ENV [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-RUN source ~/.bash_profile
+RUN echo 'export NVM_DIR="$HOME/.nvm"' >> /home/${USER}/.bash_profile
+RUN echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> /home/${USER}/.bash_profile
+RUN echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> /home/${USER}/.bash_profile
+RUN source /home/${USER}/.bash_profile
 #RUN nvm install node && \
 #nvm use node
