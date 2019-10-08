@@ -25,20 +25,11 @@ make prefix=/usr/local all && \
 make prefix=/usr/local install && \
 source /etc/profile
 
-#Pyenv install
-##Pyenv Homepage(git) - https://github.com/pyenv/pyenv
-RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-ENV PYENV_ROOT=~/.pyenv
-ENV PATH=$PYENV_ROOT/bin:$PATH
-#RUN pyenv install 3.7.3 && \
-#pyenv global 3.7.3
+#Httpd install
+RUN yum -y install httpd
 
-#Nvm install
-##Nvm Homepage(git) - https://github.com/nvm-sh/nvm
-RUN git clone https://github.com/nvm-sh/nvm.git ~/.nvm
-RUN cd ~/.nvm && . nvm.sh
-#ENV NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-#ENV [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-#RUN source ~/.bash_profile
-#RUN nvm install node && \
-#nvm use node
+#enable httpd
+RUN sudo systemctl enable httpd
+
+#exec
+CMD ["/sbin/init"]

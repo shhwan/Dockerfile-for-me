@@ -6,6 +6,11 @@ base_Dockerfile for me
   - git
   - pyenv
   - nvm
+- centos7.5ChangeUser
+  - same base, But This Dockerfile - Change User
+- centos7.5httpd
+  - git
+  - httpd 
 
 ## Command
 ```
@@ -15,9 +20,9 @@ cd folderName
 #image build from Dockerfile
 docker build -t imageName:tagName .
 
-##if you use ARG USER/PASSWD
-##Delete USER/PASSWD
-##AND WIRTE ONLY
+##if you use Another USER -> You can use ARG USER/PASSWD
+##Delete USER value and PASSWD value
+##AND WRITE ONLY
 ##ARG USER   //  ARG PASSWD
 docker build -t imageName:tagName . --build-arg USER=userName --build-arg PASSWD=passWord
 
