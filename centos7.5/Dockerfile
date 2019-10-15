@@ -41,3 +41,17 @@ RUN echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh | bash
 #RUN nvm install node && \
 #nvm use node
+
+#Psql 11 install
+##Postgresql repo Official - https://yum.postgresql.org/repopackages.php
+##Postgresql tutorial database sample dvdrental - http://www.postgresqltutorial.com/postgresql-sample-database/
+RUN yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+RUN yum -y install postgresql11-server
+#RUN sh /usr/pgsql-11/bin/postgresql-11-setup initdb
+COPY ./templates/dvdrental.tar ${tmp}/
+#USER postgres
+#RUN cd ${tmp} && \ 
+#pg_restore -U postgres -d dvdrental ./dvdrental.tar
+
+#exec
+CMD ["/sbin/init"]

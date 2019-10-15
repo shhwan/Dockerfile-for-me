@@ -3,8 +3,8 @@ LABEL maintainer="SHY"
 
 #ARG
 ARG gitver="2.9.5"
-ARG USER="deploy"
-ARG PASSWD="deploy_"
+ARG USER
+ARG PASSWD
 
 #ENV
 #ENV http_proxy=value
@@ -37,19 +37,16 @@ ENV HOME /home/${USER}
 
 #Pyenv install
 ##Pyenv Homepage(git) - https://github.com/pyenv/pyenv
+RUN yum -y install bzip2 bzip2-devel readline readline-devel sqlite sqlite-devel
 RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-RUN echo 'export PYENV_ROOT=$HOME/.pyenv' >> /home/${USER}/.bash_profile
-RUN echo 'export PATH=$PYENV_ROOT/bin:$PATH' >> /home/${USER}/.bash_profile
-RUN source /home/${USER}/.bash_profile
+RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+RUN echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+RUN echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 #RUN pyenv install 3.7.3 && \
 #pyenv global 3.7.3
 
 #Nvm install
 ##Nvm Homepage(git) - https://github.com/nvm-sh/nvm
-RUN git clone https://github.com/nvm-sh/nvm.git ~/.nvm
-RUN echo 'export NVM_DIR="$HOME/.nvm"' >> /home/${USER}/.bash_profile
-RUN echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> /home/${USER}/.bash_profile
-RUN echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> /home/${USER}/.bash_profile
-RUN source /home/${USER}/.bash_profile
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh | bash
 #RUN nvm install node && \
 #nvm use node

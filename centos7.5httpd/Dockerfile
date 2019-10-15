@@ -29,7 +29,7 @@ source /etc/profile
 RUN yum -y install httpd
 
 #enable httpd
-RUN sudo systemctl enable httpd
+RUN systemctl enable httpd
 
 #exec
 CMD ["/sbin/init"]
