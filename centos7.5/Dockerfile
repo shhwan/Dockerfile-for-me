@@ -5,6 +5,9 @@ LABEL maintainer="SHY"
 ARG gitver="2.9.5"
 ARG tmp="/var/tmp"
 
+# ARG USER
+# ARG PASSWD
+
 #ENV
 #ENV http_proxy=value
 #ENV https_proxy=value
@@ -13,18 +16,18 @@ ARG tmp="/var/tmp"
 
 #Yum update & base install & useradd
 RUN yum -y update && \
-yum -y install epel-release sudo vim make wget unzip zip && \
-mkdir -p ${tmp}
+    yum -y install epel-release sudo vim make wget unzip zip && \
+    mkdir -p ${tmp}
 
 #Git install
 RUN yum -y install gcc curl-devel expat-devel gettext-devel openssl openssl-devel zlib-devel perl-ExtUtils-MakeMaker autoconf libffi-devel
 RUN wget -P ${tmp} https://mirrors.edge.kernel.org/pub/software/scm/git/git-${gitver}.tar.gz
 RUN cd ${tmp} && \
-tar xzvf git-${gitver}.tar.gz && \
-cd ${tmp}/git-${gitver} && \
-make prefix=/usr/local all && \
-make prefix=/usr/local install && \
-source /etc/profile
+    tar xzvf git-${gitver}.tar.gz && \
+    cd ${tmp}/git-${gitver} && \
+    make prefix=/usr/local all && \
+    make prefix=/usr/local install && \
+    source /etc/profile
 
 #Pyenv install
 ##Pyenv Homepage(git) - https://github.com/pyenv/pyenv
