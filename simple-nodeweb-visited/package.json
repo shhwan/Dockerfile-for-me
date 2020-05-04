@@ -1,0 +1,13 @@
+{
+    "name": "simple-nodeweb-visited",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "dependencies": {
+        "express": "*",
+        "redis": "2.8.0"
+    },
+    "scripts": {
+        "start": "express index.js"
+    }
+}
