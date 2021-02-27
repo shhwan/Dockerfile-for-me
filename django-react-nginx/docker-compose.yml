@@ -1,0 +1,19 @@
+version: "3"
+services:
+    server:
+        stdin_open: true
+        build:
+            context: ./node
+            dockerfile: Dockerfile
+        ports:
+            - "8000:8000"
+    react:
+        stdin_open: true
+        build:
+            context: ./react
+            dockerfile: Dockerfile
+        ports:
+            - "8080:80"
+        volumes:
+            - /app/node_modules
+            - ./react:/app
